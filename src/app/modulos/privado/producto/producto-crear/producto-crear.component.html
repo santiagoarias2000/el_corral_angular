@@ -1,0 +1,175 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-3">
+  <div class="pt-5 pd-2 border-bottom">
+    <h2 class="h2_center">Crear un rol dentro de la empresa</h2>
+  </div>
+  <div style="padding-top: 80px">
+    <div class="container">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-10">
+          <div class="card rounded-3 text-black">
+            <div class="row g-0">
+              <div class="col-md-6">
+                <div class="card-body">
+                  <div class="text-center">
+                    <a [routerLink]="['/dash/home']"
+                      ><img src="./assets/images/burguer_login.png" alt="logo"
+                    /></a>
+                    <h4 class="mt-1 mb-4 pb-1">Crea un producto</h4>
+                  </div>
+
+                  <div>
+                    <form
+                      #frmCrear="ngForm"
+                      class="col-md-12"
+                      (submit)="frmCrear.form.valid && operacion(frmCrear)"
+                      novalidate
+                    >
+                      <div class="form-outline mb-2">
+                        <input
+                          type="text"
+                          id="productoname"
+                          name="prodcutoname"
+                          required
+                          class="form-control"
+                          placeholder="Nombre del producto"
+                          [(ngModel)]="objProducto.nombreProducto"
+                          [ngClass]="{
+                            'is-invalid':
+                              frmCrear.submitted && prodcutoname.invalid
+                          }"
+                          #prodcutoname="ngModel"
+                          required
+                        />
+                        <label
+                          class="form-label text-warning"
+                          for="form2Example22"
+                          ><small>&nbsp;PRODUCTO:</small></label
+                        >
+                      </div>
+
+                      <div class="form-outline mb-2">
+                        <input
+                          type="text"
+                          id="valorProducto"
+                          name="valorProducto"
+                          required
+                          class="form-control"
+                          placeholder="Nombre del valor"
+                          [(ngModel)]="objProducto.valorProducto"
+                          [ngClass]="{
+                            'is-invalid':
+                              frmCrear.submitted && valorProducto.invalid
+                          }"
+                          #valorProducto="ngModel"
+                          required
+                        />
+                        <label
+                          class="form-label text-warning"
+                          for="form2Example22"
+                          ><small>&nbsp;VALOR:</small></label
+                        >
+                      </div>
+                      <div class="form-outline mb-2">
+                        <input
+                          type="text"
+                          id="detalleProducto"
+                          name="detalleProducto"
+                          required
+                          class="form-control"
+                          placeholder="Detalle del producto"
+                          [(ngModel)]="objProducto.detalleProducto"
+                          [ngClass]="{
+                            'is-invalid':
+                              frmCrear.submitted && detalleProducto.invalid
+                          }"
+                          #detalleProducto="ngModel"
+                          required
+                        />
+                        <label
+                          class="form-label text-warning"
+                          for="form2Example22"
+                          ><small>&nbsp;DETALLE:</small></label
+                        >
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="foto" class="form-label"> </label>
+                        <div class="input-group">
+                          <input
+                            type="text"
+                            class="form-control form-control-sm"
+                            id="foto"
+                            name="foto"
+                            #foto="ngModel"
+                            [(ngModel)]="objProducto.publicoFotoProducto"
+                            [ngClass]="{
+                              'is-invalid': frmCrear.submitted && foto.invalid
+                            }"
+                            required
+                          />
+                          <button
+                            class="btn btn-outline-warning"
+                            (click)="cajaOculta.click()"
+                          >
+                            <span>+</span>
+                            <input
+                              type="file"
+                              style="display: none"
+                              #cajaOculta
+                              (change)="seleccionarFoto($event)"
+                            />
+                            
+                          </button>
+
+                          <div
+                            class="invalid-feedback"
+                            *ngIf="frmCrear.submitted && foto.invalid"
+                          >
+                            <span *ngIf="foto.errors?.['required']">
+                              Foto requerida
+                            </span>
+
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <label
+                      class="form-label text-warning"
+                      for="form2Example22"
+                      ><small>&nbsp;FOTO:</small></label
+                    >
+                      <div class="text-center pt-1 mb-5 pb-1">
+                        <div class="d-grid gap-2">
+                          <button
+                            class="btn btn-outline-warning gradient-custom-2"
+                            type="submit"
+                          >
+                            Crear producto
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6 d-flex align-items-center gradient-custom-2">
+                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+                  <div
+                    class="d-flex justify-content-center text-white"
+                    style="color: black"
+                  >
+                    <h1>Crear un producto</h1>
+                  </div>
+                  <p>
+                    <img src="assets/images/HAMB.jpeg" alt="Login" style="max-width: 400px;"/>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

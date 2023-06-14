@@ -1,0 +1,178 @@
+<nav
+  id="sidebarMenu"
+  class="col-md-3 col-lg-2 d-md-block sidebar collapse bg-white"
+>
+  <div class="position-sticky pt-3 sidebar-sticky">
+    <div class="flex-shrink-0 p-3">
+      <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle d-inline-flex align-items-center rounded border-0"
+            data-bs-toggle="collapse"
+            data-bs-target="#opcionMiPerfil"
+            aria-expanded="true"
+          >
+            Mi perfil
+          </button>
+          <div class="collapse show" id="opcionMiPerfil">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Editar</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Cerrar sesión</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#opcionRoles"
+            aria-expanded="false"
+          >
+            Roles
+          </button>
+          <div class="collapse" id="opcionRoles">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  [routerLink]="['/private/role/addrole']"
+                  >Crear</a
+                >
+              </li>
+              <li>
+                <a
+                href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  [routerLink]="['/private/role/managerole']"
+                  >Administrar</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#opcionUsuarios"
+            aria-expanded="false"
+          >
+            Usuarios
+          </button>
+          <div class="collapse" id="opcionUsuarios">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Crear</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Administrar</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#opcionRestaurantes"
+            aria-expanded="false"
+          >
+            Restaurantes
+          </button>
+          <div class="collapse" id="opcionRestaurantes">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Overview</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Weekly</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Monthly</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  >Annually</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="mb-1">
+          <button
+            class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#opcionProductos"
+            aria-expanded="false"
+          >
+            Productos
+          </button>
+          <div class="collapse" id="opcionProductos">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li>
+                <a
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  [routerLink]="['/private/product/listproduct']"
+                  >Listar</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  [routerLink]="['/private/product/addproduct']"
+                  >Crear</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link-dark d-inline-flex text-decoration-none rounded"
+                  [routerLink]="['/private/product/manageproduct']"
+                  >Administrar</a
+                >
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+

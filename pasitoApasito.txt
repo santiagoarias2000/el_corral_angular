@@ -1,0 +1,536 @@
+# Instalación  de librerias
+
+npm i bootstrap
+npm i bootstrap-icons
+npm i @fortawesome/fontawesome-free
+npm i ngx-bootstrap
+npm i ngx-toastr
+npm i ngx-pagination
+npm i js-sha512
+npm i @popperjs/core
+
+# ****************************************************
+# Copiar las imagenes del assets
+
+En src/assets
+
+# ****************************************************
+
+# Configurar el angular.json
+
+    "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+        "node_modules/@fortawesome/fontawesome-free/css/all.css",
+        "node_modules/ngx-toastr/toastr.css",
+        "src/styles.css"
+    ],
+    "scripts": [
+        "node_modules/@popperjs/core/dist/umd/popper.min.js",
+        "node_modules/bootstrap/dist/js/bootstrap.min.js"
+    ]
+
+    "configurations": {
+    "production": {
+        "browserTarget": "micorralito:build:production",
+        "port": 8090
+    },
+    "development": {
+        "browserTarget": "micorralito:build:development",
+        "port": 8089
+    }
+    },
+
+# ****************************************************
+
+# Ahora toca configurar el archivo src\app\app.module.ts
+
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+
+    FormsModule,
+    ModalModule,
+    ToastrModule,
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}
+
+# ****************************************************
+
+# Creación de módulos
+
+ng g m modulos/contenedor
+
+ng g c modulos/contenedor/land/cabeceraLand
+ng g c modulos/contenedor/land/contenedorLand
+ng g c modulos/contenedor/land/pieLand
+ng g c modulos/contenedor/dash/cabeceraDash
+ng g c modulos/contenedor/dash/contenedorDash
+
+ng g m modulos/publico
+ng g m modulos/publico/publico-routing --flat --module=publico
+
+ng g c modulos/publico/error
+ng g c modulos/publico/menu
+ng g c modulos/publico/restaurante
+ng g c modulos/publico/evento
+ng g c modulos/publico/inicio
+ng g c modulos/publico/acerca
+ng g c modulos/publico/acceso
+ng g c modulos/publico/registro
+ng g c modulos/publico/ciudad
+
+
+ng g m modulos/privado/rol
+ng g m modulos/privado/rol/rol-routing --flat --module=rol
+ng g c modulos/privado/rol/rolCrear
+ng g c modulos/privado/rol/rolEditar
+ng g c modulos/privado/rol/rolAdmin
+
+
+ng g m modulos/privado/usuario
+ng g m modulos/privado/usuario/usuario-routing --flat --module=usuario
+ng g c modulos/privado/usuario/usuarioCrear
+ng g c modulos/privado/usuario/usuarioEditar
+ng g c modulos/privado/usuario/usuarioAdmin
+
+
+ng g m modulos/privado/restaurante
+ng g m modulos/privado/restaurante/restaurante-routing --flat --module=restaurante
+ng g c modulos/privado/restaurante/restauranteCrear
+ng g c modulos/privado/restaurante/restauranteEditar
+ng g c modulos/privado/restaurante/restauranteAdmin
+
+
+ng g m modulos/privado/control
+ng g m modulos/privado/control/control-routing --flat --module=control
+
+ng g c modulos/privado/control/errorInterno
+ng g c modulos/privado/control/inicioInterno
+
+# ****************************************************
+
+# Vamos a crear las utilidades
+
+ng g enum utilidades/mensajes/toast --type=func
+ng g enum utilidades/rutas/landRutas
+ng g enum utilidades/rutas/dashRutas
+
+# ****************************************************
+
+# Configurar la plantilla de inicio: src\app\app.component.html
+
+<router-outlet></router-outlet>
+
+
+# ****************************************************
+
+# Vamos a configurar el contenedor:
+# src\app\modulos\contenedor\contenedor.module.ts
+
+import { RouterModule } from '@angular/router';
+
+
+  imports: [CommonModule, RouterModule],
+  exports: [CabeceraLandComponent, ContenedorLandComponent, PieLandComponent],
+
+# ****************************************************
+
+
+# Vamos a configurar el modulo:
+# src\app\app.module.ts
+
+import { ContenedorModule } from './modulos/contenedor/contenedor.module';
+
+imports: [
+    BrowserModule,
+    AppRoutingModule,
+
+    FormsModule,
+    NgxPaginationModule,
+    ModalModule.forRoot(),
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+
+    ContenedorModule
+  ],
+
+
+# ****************************************************
+
+# Ahora el ruteo para el contenedor
+# src\app\modulos\contenedor\land\contenedor-land\contenedor-land.component.html
+
+<router-outlet></router-outlet>
+
+
+# ****************************************************
+
+# Miercoles, no metimos la parte publica !!!!
+# Pero es que no la hemos hecho....
+
+
+# ****************************************************
+
+# Ahora el ruteo básico en:
+# src\app\modulos\publico\publico-routing.module.ts
+
+import { RouterModule, Routes } from '@angular/router';
+
+const routes: Routes = [
+  { path: 'home', component: InicioComponent },
+  { path: 'city', component: CiudadComponent },
+  { path: 'restaurant', component: RestauranteComponent },
+  { path: 'menu', component: MenuComponent },
+  { path: 'event', component: EventoComponent },
+  { path: 'about', component: AcercaComponent },
+  { path: 'login', component: AccesoComponent },
+  { path: 'register', component: RegistroComponent },
+
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', component: ErrorComponent },
+];
+
+@NgModule({
+  declarations: [],
+  imports: [CommonModule, RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class PublicoRoutingModule {}
+
+
+# ****************************************************
+
+# Ahora, pal modulo publico
+# src\app\modulos\publico\publico.module.ts
+
+import { ToastrModule } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
+import { ContenedorModule } from '../contenedor/contenedor.module';
+
+  imports: [
+    CommonModule,
+    PublicoRoutingModule,
+
+    FormsModule, <--
+    ToastrModule.forRoot(), <-- 
+    ContenedorModule <--
+  ],
+
+
+# ****************************************************
+
+# Las rutas Padres se deben cargar
+# src\app\utilidades\rutas\land-rutas.ts
+
+import { Routes } from '@angular/router';
+
+export const RUTAS_LANDSCAPE: Routes = [
+  {
+    path: 'land',
+    loadChildren: () =>
+      import('../../modulos/publico/publico.module').then(
+        (m) => m.PublicoModule
+      ),
+  },
+
+  { path: '', redirectTo: 'land', pathMatch: 'full' },
+];
+
+
+# ****************************************************
+
+# De por DIOS, el ruteo final
+# src\app\app-routing.module.ts
+
+const routes: Routes = [
+  {path: '', component: ContenedorLandComponent, children: RUTAS_LANDSCAPE},
+
+  {path: '**', component: ErrorComponent}
+];
+
+
+# ****************************************************
+# Cargar las plantillas y los Link de la cabecera
+
+src\app\modulos\publico\inicio\inicio.component.html
+<app-cabecera-land></app-cabecera-land>
+xxx
+<app-pie-land></app-pie-land>
+
+
+
+
+# Incluir HttpClientModule para poder usar servicios
+# ****************************************************
+# Archivo: src\app\app.module.ts
+
+import { HttpClientModule } from '@angular/common/http';
+y
+  imports: [
+...
+    HttpClientModule,
+...
+  ],
+
+
+
+
+
+# Crear el primero observador
+# ****************************************************
+# Archivo: src\app\utilidades\observadores\tipo-any.ts
+
+import { Observer } from 'rxjs';
+
+export const observadorAny: Observer<any> = {
+  next(res) {
+    // console.log(res);
+  },
+  error(err) {
+    // console.log(err);
+  },
+  complete() {
+    // console.log('Completado');
+  }
+}
+
+
+
+
+# Configurar los endPoint
+# ****************************************************
+# Archivo: src\app\utilidades\dominios\uris.ts
+
+export const API_URL = 'http://localhost:3200/';
+
+// Servicios públicos
+export const API_CIUDAD = API_URL + 'api/public/city';
+export const API_RESTAURANTE = API_URL + '/api/public/restaurant';
+
+// Servicios privados
+// Pendiente
+
+
+
+# Crear los modelos para recibir información
+# ****************************************************
+ng g class modelos/Ciudad  --skip-tests=true
+Se puede copiar el contenido del Back para que coincida
+# ****************************************************
+
+
+
+# Servicios
+# ****************************************************
+ng g s servicios/ciudad --skip-tests=true
+
+import { Injectable } from '@angular/core';
+
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import * as miUrl from '../utilidades/dominios/uris';
+import { Ciudad } from '../modelos/ciudad';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CiudadService {
+  public apiCiudad: string = miUrl.API_CIUDAD;
+
+  constructor(private http: HttpClient) {}
+
+  public obtenerCiudades(): Observable<Ciudad[]> {
+    return this.http.get<Ciudad[]>(this.apiCiudad + '/all');
+  }
+  
+}
+
+# ****************************************************
+
+
+# Componente Ciudad listar
+# Arvhivo: src\app\modulos\publico\ciudad\ciudad.component.ts
+# ****************************************************
+Pilas con los implements
+
+
+
+
+
+# Los estilos de la letra
+# Arvhivo: src\index.html
+# ****************************************************
+    <link
+      href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,600,600i,700,700i|Satisfy|Comic+Neue:300,300i,400,400i,700,700i"
+      rel="stylesheet"
+    />
+
+
+# Crear el endPoint
+# Archivo: src\app\utilidades\dominios\uris.ts
+export const API_INICIO_SESION = API_URL + 'api/public/login';
+
+
+
+# Ruteo para activar el inicio de sesión
+# Arvhivo: src\app\modulos\contenedor\land\cabecera-land\cabecera-land.component.html
+# ****************************************************
+Se debe agregar el enlace para el loguin
+    <a class="book-a-table-btn scrollto" [routerLink]="['/land/login']">
+      Tu pedido aquí
+    </a>
+
+
+
+# Creación del modelo para iniciar sesion
+# Arvhivo: src\app\modelos\inicio-sesion.ts
+# ****************************************************
+ng g class modelos/InicioSesion  --skip-tests=true
+
+export class InicioSesion {
+  public nombreUsuario: string;
+  public clave: string;
+  public reClave?: string;
+
+  constructor(nom: string, cla: string, rec: string) {
+    this.nombreUsuario = nom;
+    this.clave = cla;
+    this.reClave = rec;
+  }
+}
+
+
+# Creación del modelo para recibir Respuesta inicio Sesion
+# Arvhivo: src\app\modelos\respuesta-inicio-sesion.ts
+# ****************************************************
+ng g class modelos/RespuestaInicioSesion  --skip-tests=true
+
+export class RespuestaInicioSesion {
+  public tokenUSTA: string;
+  public fotoUSTA: string;
+
+  constructor(tok: string, fot: string) {
+    this.tokenUSTA = tok;
+    this.fotoUSTA = fot;
+  }
+}
+
+
+# Ahora el componente de inicio de sesión
+# Arvhivo: src\app\modulos\publico\acceso\acceso.component.html
+# ****************************************************
+
+Ahora la plantilla, el CSS y la clase
+
+
+
+# Servicios iniciarSesion
+# ****************************************************
+ng g s servicios/restaurante --skip-tests=true
+Modelo
+
+
+
+# Servicios iniciarSesion
+# ****************************************************
+ng g s servicios/iniciarSesion --skip-tests=true
+
+
+#*****************************************************
+iniciamos con el dashboard
+ng g c modulos/contenedor/dash/menuDash
+
+--Vamos a colocar los estilos y la plantilla html
+
+#*****************************************************
+Vamos a colocar la cabecera 
+
+#*****************************************************
+Vamos a colocar el componente de inicio
+
+#*****************************************************
+Vamos a configurar el componente contenedor dash
+
+#*****************************************************
+Hagamos un ejemplo interno con role
+
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+    <div class="pt-3 pd-2 border-bottom">
+        <h2>Este es el componete admin</h2>
+    </div>
+    <p>Algo más............</p>
+</main>
+
+Pilas con los estilos de la delicious....
+
+#******************************************************
+Vamos a configurar el route
+
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { InicioInternoComponent } from './inicio-interno/inicio-interno.component';
+import { ErrorInternoComponent } from './error-interno/error-interno.component';
+
+const routes: Routes=[
+  {path: 'board', component: InicioInternoComponent},
+  {path:'', redirectTo:'board', pathMatch:'full'},
+  {path:'**', component: ErrorInternoComponent}
+]
+
+
+@NgModule({
+  declarations: [],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes)
+  ],
+  exports:[RouterModule]
+})
+export class ControlRoutingModule { }
+
+
+#********************************************************
+Ahora viene el 
+
+
+
+
+
+#**********************************************
+para estraer los datos que trae el token
+npm i jwt-decode
+
+ng g guard vigilante --skip-tests=true
+
+ng g interceptor token --skip-tests=true
+
+**************************************************
+Productos
+ng g class modelos/Productos  --skip-tests=true
+
+ng g s servicios/producto --skip-tests=true
+
+ng g m modulos/privado/producto
+ng g m modulos/privado/producto/producto-routing --flat --module=producto
+ng g c modulos/privado/producto/productoCrear
+ng g c modulos/privado/producto/productoListar
+ng g c modulos/privado/producto/productoAdmin
+ng g c modulos/privado/producto/productoActualizar
+ng g c modulos/privado/producto/productoActualizarConImagen

@@ -1,0 +1,63 @@
+.h2_center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.gradient-custom-2 {
+  /* fallback for old browsers */
+  background: #fccb90;
+
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(
+    to right,
+    #ebbbbb,
+    #db7173,
+    #b52d61,
+    #963779
+  );
+
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, #ffcf88, #ffbd5b, #fdac33, #ff9c07);
+}
+
+@media (min-width: 768px) {
+  .gradient-form {
+    height: 100vh !important;
+  }
+}
+@media (min-width: 769px) {
+  .gradient-custom-2 {
+    border-top-right-radius: 0.3rem;
+    border-bottom-right-radius: 0.3rem;
+  }
+}
+
+/* Estilo básico para el elemento select */
+.my-select {
+  padding: 8px;
+  font-size: 16px;
+  background-color: #fff;
+  border: 1px solid #ff9c07;
+  border-radius: 4px;
+  padding-left: 100px;
+  padding-right: 100px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Estilo para los bordes cuando se enfoca en el select */
+.my-select:focus {
+  outline: none;
+  border-color: #fccb90;
+}
+
+/* Estilo para los iconos de despliegue del select */
+.my-select::after {
+  content: "\25BC";
+  border-color: #fccb90;
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}

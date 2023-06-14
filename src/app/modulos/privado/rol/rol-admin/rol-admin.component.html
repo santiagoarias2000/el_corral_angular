@@ -1,0 +1,238 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+  <div class="pt-3 pd-2 border-bottom">
+    <h2 class="h2_center">Panel de control de usuarios</h2>
+  </div>
+  <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-white pt-7 border-y border-300">
+    <div
+      data-list='{"valueNames":["product","customer","rating","review","time"],"page":6}'
+    >
+      <div class="row align-items-end justify-content-between pb-5 g-3">
+        <div class="col-auto">
+          <h3>Lista de usuarios en la plataforma</h3>
+          <p class="text-700 lh-sm mb-0">Administración de usuarios</p>
+        </div>
+        <div class="col-12 col-md-auto">
+          <div class="row g-2 gy-3">
+            <div class="col-auto flex-1">
+              <div class="search-box">
+                <form
+                  class="position-relative"
+                  data-bs-toggle="search"
+                  data-bs-display="static"
+                >
+                  <input
+                    class="form-control search-input search form-control-sm"
+                    type="search"
+                    placeholder="Buscar"
+                    aria-label="Search"
+                  />
+                  <span class="fas fa-search search-box-icon"></span>
+                </form>
+              </div>
+            </div>
+            <div class="col-auto">
+              <button
+                class="btn btn-sm btn-phoenix-secondary bg-white hover-bg-100 me-2"
+                type="button"
+              >
+                Todos los usuarios</button
+              ><button
+                class="btn btn-sm btn-phoenix-secondary bg-white hover-bg-100"
+                type="button"
+                data-bs-toggle="dropdown"
+                data-boundary="window"
+                aria-haspopup="true"
+                aria-expanded="false"
+                data-bs-reference="parent"
+              >
+                <span class="fas fa-ellipsis-h fs--2"></span>
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">Super usuarios</a></li>
+                <li><a class="dropdown-item" href="#">Administradores</a></li>
+                <li><a class="dropdown-item" href="#">Usuarios</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive mx-n1 px-1 scrollbar">
+        <table class="table fs--1 mb-0 border-top border-200">
+          <thead>
+            <tr>
+              <th class="white-space-nowrap fs--1 ps-0 align-middle">
+                <div class="form-check mb-0 fs-0">
+                  <input
+                    class="form-check-input"
+                    id="checkbox-bulk-reviews-select"
+                    type="checkbox"
+                    data-bulk-select='{"body":"table-latest-review-body"}'
+                  />
+                </div>
+              </th>
+              <th class="sort white-space-nowrap align-middle" scope="col"></th>
+              <th
+                class="sort white-space-nowrap align-middle"
+                scope="col"
+                style="min-width: 100px"
+                data-sort="product"
+              >
+                IDENTIFICACIÓN
+              </th>
+              <th
+                class="sort align-middle"
+                scope="col"
+                data-sort="customer"
+                style="min-width: 250px"
+              >
+                NOMBRE ROL
+              </th>
+              <th
+                class="sort align-middle"
+                scope="col"
+                data-sort="rating"
+                style="min-width: 200px"
+              >
+                ESTADO ROL
+              </th>
+              <th
+                class="sort align-middle"
+                scope="col"
+                style="max-width: 350px"
+                data-sort="review"
+              >
+                ACCIONES
+              </th>
+            </tr>
+          </thead>
+          <tbody
+            class="list"
+            id="table-latest-review-body"
+            *ngIf="cargaFinalizada; else spinner"
+          >
+            <tr
+              class="hover-actions-trigger btn-reveal-trigger position-static"
+              *ngFor="let objRole of arregloRoles; let i = index"
+            >
+              <td class="fs--1 align-middle ps-0">
+                <div class="form-check mb-0 fs-0">
+                  <input class="form-check-input" type="checkbox" />
+                </div>
+              </td>
+              <td class="align-middle product white-space-nowrap py-0">
+                <div class="">
+                  <img
+                    src="../../../../../assets/images/user_img.png"
+                    alt="ImagenDeUsuario.png"
+                    width="40"
+                  />
+                </div>
+              </td>
+              <td class="align-middle product white-space-nowrap">
+                <p class="fw-semi-bold d-flex justify-content-center">
+                  {{ i + 1 }}
+                </p>
+              </td>
+              <td class="align-middle customer white-space-nowrap">
+                <b class="d-flex align-items-center justify-content-center">
+                  <h6 class="mb-0 ms-3 text-900" style="color: black">
+                    {{ objRole.nombreRol }}
+                  </h6>
+                </b>
+              </td>
+
+              <td class="align-middle text-start ps-5 status">
+                <span
+                class="border border-success rounded fs--2 bg-success p-1" style="--bs-bg-opacity: .5; color: #fff;"
+                *ngIf="objRole.estadoRol == 1"
+                >
+                  <span class="badge-label"><b>Activo</b> &nbsp;</span>
+                  <span class="fas fa-check"></span>
+                </span>
+                <span
+                  class="border border-danger rounded fs--2 bg-danger p-1" style="--bs-bg-opacity: .5; color: #fff;"
+                  *ngIf="objRole.estadoRol == 2"
+                >
+                  <span class="badge-label"><b>Inactivo</b> &nbsp;</span>
+                  <span class="fa-thin fa-x"></span>
+                </span>
+              </td>
+
+              <td class="justify-content-center white-space-nowrap pe-0">
+                <div class="position-relative">
+                  <div class="hover-actions">
+                    <button class="btn btn-sm btn-phoenix-secondary me-1 fs--2">
+                      <span class="fas fa-check"></span>
+                    </button>
+                    <button class="btn btn-sm btn-phoenix-secondary fs--2">
+                      <span class="fas fa-trash"></span>
+                    </button>
+                    <button class="btn btn-sm btn-phoenix-secondary fs--2">
+                      <span class="fa-solid fa-user-pen"></span>
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row align-items-center py-1">
+        <div class="pagination d-none"></div>
+        <div class="col d-flex fs--1">
+          <p
+            class="mb-0 d-none d-sm-block me-3 fw-semi-bold text-900"
+            data-list-info="data-list-info"
+          >
+            1 to 6 <span class="text-600"> Items of </span>15
+          </p>
+          <a class="fw-semi-bold" href="#!" data-list-view="*"
+            >View
+            <span
+              class="fas fa-angle-right ms-1"
+              data-fa-transform="down-1"
+            ></span></a
+          ><a class="fw-semi-bold d-none" href="#!" data-list-view="less"
+            >Anterior</a
+          >
+        </div>
+        <div class="col-auto d-flex">
+          <button
+            class="btn btn-link px-1 me-1 disabled"
+            type="button"
+            title="Previous"
+            data-list-pagination="prev"
+            disabled=""
+          >
+            <span class="fas fa-chevron-left me-2"></span></button
+          ><button
+            class="btn btn-link px-1 ms-1"
+            type="button"
+            title="Next"
+            data-list-pagination="next"
+          >
+            Siguiente
+            <span class="fas fa-chevron-right ms-2"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--INICIO: Plantillas-->
+  <ng-template #spinner>
+    <div class="col-md text-center">
+      <div
+        class="spinner-border text-primary ml-auto"
+        style="width: 4rem; height: 4rem"
+        role="status"
+        aria-hidden="true"
+      ></div>
+      <div class="col-md text-center">
+        <span class="text-primary" style="font-size: 25">
+          <h2>Cargando información...</h2>
+        </span>
+      </div>
+    </div>
+  </ng-template>
+  <!--FIN: Plantillas-->
+</main>

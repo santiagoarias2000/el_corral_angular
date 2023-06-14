@@ -1,0 +1,45 @@
+<div>
+  <!-- ======= Header ======= -->
+  <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
+    <div
+      class="container-fluid container-xl d-flex align-items-center justify-content-between"
+    >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="bi bi-list"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse justify-content-center"
+        id="navbarText"
+      >
+      <img
+      src="./assets/images/burguer_login.png"
+      alt=""
+      style="width: 60px; height: auto"
+    />
+        <div class="logo me-auto">
+          <h1><a href="#">&nbsp;{{objMiSession.correoMiSesion}}</a></h1>
+        </div>
+        <a class="book-a-table-btn scrollto" 
+          >  <div class="navbar-nav">
+            <div class="nav-item">
+              <a class="nav-link px-3 text-black" 
+              (click)="sessioncita.salir()"
+              style="cursor: pointer;"
+                >Cerrar sesión</a
+              >
+            </div>
+            </div>
+          </a>
+      </div>
+    </div>
+  </nav>
+  <!-- End Header -->
+</div>
